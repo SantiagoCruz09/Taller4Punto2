@@ -1,167 +1,65 @@
-# 🧪 Taller: Client-Server en Angular y NodeJS
+# Taller: Client-Server en Angular y NodeJS
 
-- Este proyecto fue generado utilizando [Angular CLI](https://github.com/angular/angular-cli) 20.3.14.
+Este proyecto fue generado utilizando Angular CLI 20.3.14.
 
-- El objetivo del taller es practicar la creación de 2 proyectos para representar la arquitectura
-cliente servidor, con las Tecnologias de Angular y NodeJS.
+El objetivo del taller es practicar la creación de dos proyectos que representan la arquitectura cliente-servidor, usando las tecnologías de Angular y Node.js.
 
-## 📋 Requisitos Previos
+Integrantes: Santiago Santacruz y Juan Felipe Marulanda.
 
-Antes de iniciar, asegúrate de tener instaladas las siguientes herramientas:
+## Requisitos previos
 
-- Node.js
-- npm
-- Angular CLI
-- Git
-- Visual Studio Code
+Antes de iniciar, se debe tener instalado Node.js, npm, Angular CLI, Git y Visual Studio Code. Se puede verificar la versión de Angular CLI con el comando ng version.
 
-Puedes verificar Angular CLI en consola con: ```ng version```
+## Iniciar el servidor (Server-NodeJS) en modo desarrollo
 
-## ▶️ Iniciar el Server (Server-NodeJS) en Modo Desarrollo
+Se debe ubicar la consola en la raíz del proyecto Server-NodeJS, donde está el archivo package.json, e instalar las dependencias con npm i. Luego se ejecuta el proyecto con npm run start. Cuando el servidor esté corriendo, queda disponible en http://localhost:3000.
 
-Sigue estos pasos para ejecutar el proyecto localmente:
+## Documentación de las APIs con Swagger
 
-### 1️⃣ Abrir la consola
+La documentación de todas las APIs se encuentra en http://localhost:3000/api/docs. Ahí se puede consultar el detalle de cada endpoint, sus parámetros y ejemplos de respuesta.
 
-Ubícate en la raíz del proyecto de ServerNodejs (donde se encuentra el archivo package.json).
+## Funcionamiento de las APIs
 
-### 2️⃣ Instalar dependencias
+El backend expone cinco recursos, cada uno generando datos dinámicamente mediante faker.js:
 
-```npm i```
+http://localhost:3000/api/users/10 devuelve un listado de usuarios.
 
-### 3️⃣ Ejecutar el proyecto
+http://localhost:3000/api/products/10 devuelve un listado de productos.
 
-Para ejecutar el proyecto debemos usar el siguiente comando
+http://localhost:3000/api/employees/10 devuelve un listado de empleados.
 
-```npm run start```
+http://localhost:3000/api/projects/10 devuelve un listado de proyectos.
 
-### 4️⃣ Abrir en el navegador
+http://localhost:3000/api/categories/10 devuelve un listado de categorías.
 
-Cuando el servidor esté en ejecución, abre un navegador y accede a: `http://localhost:3000/`
+En todos los casos, el número al final de la URL indica la cantidad de registros a generar.
 
-### 🔁 Documentación de APIs con Swagger
+## Iniciar el cliente (Client-Angular) en modo desarrollo
 
-Para acceder a la documentación de las APIs debemos acceder al siguiente enlace:
+Se debe ubicar la consola en la raíz del proyecto Client-Angular, donde está el archivo package.json, e instalar las dependencias con npm i. Luego se ejecuta el proyecto con npm run start. Cuando el servidor esté corriendo, se puede acceder desde el navegador a http://localhost:4200.
 
-- `http://localhost:3000/api/docs`
+El cliente cuenta con cinco vistas, todas consumiendo datos reales del backend: Usuarios, Productos, Empleados, Proyectos y Categorías.
 
-Aqui encontraras toda la información necesaria respecto al consumo de cada API y ejemplos de sus respuestas
+## Pruebas unitarias
 
-### 🔁 Funcionamiento de APIs
+El proyecto utiliza Jest para las pruebas unitarias del cliente. Se pueden ejecutar una sola vez con npm run test, en modo watch con npm run test:watch, o generando un reporte de cobertura con npm run test:coverage.
 
-Debemos poder observar una respuesta mediante un navegador web o el promagrama Postman de las siguientes urls:
+## Generar documentación con Compodoc
 
-- `http://localhost:3000/api/users`
-- `http://localhost:3000/api/products`
+El comando npm run compodoc genera un sitio estático con la documentación técnica del proyecto, incluyendo componentes, servicios, interfaces y sus dependencias, a partir de los comentarios JSDoc presentes en el código fuente.
 
-## ▶️ Iniciar el Client (Client-Angular) en Modo Desarrollo
+## Módulos nuevos implementados en este taller
 
-Sigue estos pasos para ejecutar el proyecto localmente:
+Sobre la arquitectura ya existente del proyecto se agregaron tres módulos nuevos, siguiendo el mismo patrón de capas del backend (routes, controller, service) y el mismo patrón de contenedor y presentación del cliente.
 
-### 1️⃣ Abrir la consola
+En el backend, cada módulo nuevo (Empleados, Proyectos y Categorías) expone un endpoint GET que genera datos dinámicamente con faker.js y está documentado en Swagger con el mismo estilo que los módulos originales de Usuarios y Productos.
 
-Ubícate en la raíz del proyecto de Client-Angular (donde se encuentra el archivo package.json).
+En el cliente, cada módulo nuevo cuenta con su interfaz, su servicio consumiendo la API mediante HttpClient, su componente de tabla, su página contenedora con manejo de estados, y sus respectivas pruebas unitarias con Jest.
 
-### 2️⃣ Instalar dependencias
+## Generación de archivos con Angular CLI
 
-```npm i```
+Para generar un componente standalone dentro de una carpeta propia se usa el comando ng g c seguido de la ruta y el nombre del componente. Para generar un servicio se usa ng g s seguido de la ruta y el nombre del servicio.
 
-### 3️⃣ Ejecutar el proyecto
+## Observaciones importantes
 
-Para ejecutar el proyecto debemos usar el siguiente comando
-
-```npm run start```
-
-### 4️⃣ Abrir en el navegador
-
-Cuando el servidor esté en ejecución, abre un navegador y accede a: `http://localhost:4200/`
-
-## 🧪 Pruebas Unitarias
-
-El proyecto utiliza Jest para la ejecución de pruebas unitarias.
-
-### ▶️ Ejecutar pruebas una sola vez
-
-```npm run test```
-
-### 🔁 Ejecutar pruebas en modo watch
-
-Este modo vuelve a ejecutar las pruebas cada vez que se detecta un cambio en el código.
-
-```npm run test:watch```
-
-### 🔁 Ejecutar coverage de pruebas
-
-Este modo permite ejecutar todas las pruebas unitarias del proyecto y generar un reporte de cobertura, el cual muestra qué porcentaje del código fuente está siendo validado por las pruebas.
-
-```npm run test:coverage```
-
-### 📘 Generar documentación con Compodoc
-
-Este modo permite generar la documentación técnica del proyecto a partir de los comentarios JSDoc en el código fuente, facilitando la visualización de la API del Design System y sus componentes.
-
-El comando genera un sitio estático con la documentación del proyecto, incluyendo componentes, interfaces, tipos, módulos y diagramas de dependencias.
-
-```npm run compodoc```
-
-## ⚙️ Generación de Archivos con Angular CLI
-
-A continuación se presentan los comandos más utilizados para generar componentes standalone.
-
-### 🧩 Generar un componente (con carpeta propia)
-
-```ng g c [ruta]/[nombre-componente]```
-
-#### Ejemplo:
-
-```ng g c pages/users```
-
-#### Archivos Generados
-
-```
-src/app/pages/users/
-├── users.html
-├── users.scss
-├── users.spec.ts
-└── users.ts
-```
-
-### 📄 Generar un componente sin carpeta (--flat)
-
-```ng g c [ruta]/[nombre-componente] --flat```
-
-#### Ejemplo:
-
-```ng g c pages/products/products.component --flat```
-
-#### Archivos Generados
-
-```
-src/app/pages/products/
-├──products.component.html
-├──products.component.scss
-├──products.component.spec.ts
-└──products.component.ts
-```
-
-### 📄 Generar un servicio
-
-```ng g s [ruta]/[nombre-servicio] ```
-
-#### Ejemplo:
-
-```ng g c services/users/users.service```
-
-#### Archivos Generados
-
-```
-src/app/services/users/
-├──users.service.spec.ts
-└──users.service.ts
-```
-
-### 🎓 Observaciones Importantes
-
-- En este taller se utilizan componentes standalone
-- Mantener una estructura clara favorece la escalabilidad y mantenibilidad
-- Revisar cobertura de pruebas unitarias y documentación
+En este taller se utilizan componentes standalone. Mantener una estructura de carpetas clara favorece la escalabilidad y el mantenimiento del proyecto. Es importante revisar tanto la cobertura de las pruebas unitarias como la documentación generada antes de dar por terminado un módulo.
